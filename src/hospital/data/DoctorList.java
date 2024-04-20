@@ -1,40 +1,27 @@
 package hospital.data;
 
 import hospital.people.Doctor;
+import hospital.people.DoctorFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DoctorList {
+    private List<Doctor> doctors = new ArrayList<>();
 
-    Doctor doctors[] = new Doctor[9];
-
-    public DoctorList() {
-        doctors[0]  = new Doctor("Dr. T. K. Banerjee", 1, "MBBS, FRCP (London & Edinburgh)");
-        doctors[1]  = new Doctor("Dr. Suniti Kumar Hazra", 1, "MBBS, DGO, MS");
-        doctors[2]  = new Doctor("Dr. Anupam Biswas", 0, "MS");
-        doctors[3]  = new Doctor("Mr. Rajanikant Pradhan", 0, "BSC (HLS) (Hearing, Language & Speech)");
-        doctors[4]  = new Doctor("Dr. Prakash Kr. Hazra", 0, "MBBS, MD, DM");
-        doctors[5]  = new Doctor("Dr. Soumitra Roy", 1, "MD, FRCP (London)");
-        doctors[6]  = new Doctor("Dr. Sandip Mandal", 0, "MBBS, MD");
-        doctors[7]  = new Doctor("Dr. Subrata Kumar Mitra", 0, "MBBS, MS (Sur.), M.Ch. (Uro)");
-        doctors[8]  = new Doctor("Dr. S. R. Kamath", 1, "MS, FRCS, MCH (Orth.)");
-    }
-
-    public int getNumDoctor() {
-        return doctors.length;
-    }
-
-    public Doctor getDoctor(int index) {
-        return doctors[index];
+    public void addDoctor(String name, String sex, int age, String qualification, String type) {
+        doctors.add(DoctorFactory.createDoctor(name, sex, age, qualification, type));
     }
 
     public void display() {
-        System.out.print(this);
+        doctors.forEach(Doctor::display);
     }
 
-    public String toString() {
-        String s = "";
-        s += "Doctor Available:\n";
-        for(int i = 0; i < doctors.length; i++)
-            s += (i + 1) + "] " + doctors[i];
-        return s;
+    public Doctor getDoctor(int index) {
+        return doctors.get(index);
+    }
+
+    public int getNumDoctors() {
+        return doctors.size();
     }
 }
